@@ -17,43 +17,42 @@ using System.Web.UI.WebControls;
 
 namespace Email
 {
+    public enum Customers { DV02, Grunenthal, OPEL, OPUK, Cleanbrite, Nordea};
+
     public class EmailGeneration
     {
         public MailMessage EmailMessage { get; private set; }
 
         public void Gen([In, MarshalAs(UnmanagedType.LPArray, SizeConst = 7)]string[] args)
         {
-
-            string[] CustomerKey = new string[] { "DV02", "Grunenthal", "OPEL", "OPUK", "Cleanbrite", "Nordea" }; // Define customers using service to match on
-            string CKeyResult = CustomerKey.FirstOrDefault(s => args[4].Contains(s)); // Collect first match and place it in CKeyResult
             string CustomerEmail;
 
             //Set customer enail address defined on contents of CKeyResult
-            switch (CKeyResult)
+            switch (Enum.Parse(typeof(Customers), args[4]))
             {
-                case "DV02":
+                case Customers.DV02:
                     CustomerEmail = "hdcalls@dv02.co.uk";
                     break;
-                case "Gruenthal":
+                case Customers.Grunenthal:
                     CustomerEmail = "uk.ithelpdesk@grunenthal.com";
                     break;
-                case "OPEL":
+                case Customers.OPEL:
                     CustomerEmail = "itsupport@otsuka-europe.com";
                     break;
-                case "OPUK":
+                case Customers.OPUK:
                     CustomerEmail = "itsupport@otsuka-europe.com";
                     break;
-                case "Cleanbrite":
+                case Customers.Cleanbrite:
                     CustomerEmail = "customercare@cleanbrite.co.uk";
                     break;
-                case "Nordea":
+                case Customers.Nordea:
                     CustomerEmail = "dlldlondonit@nordea.com";
                     break;
                 default:
                     CustomerEmail = null;
                     break;
             }
-            
+
             string emailBody = File.ReadAllText(args[6]); //Read email body text and place in variable emailBody
 
             MailDefinition md = new MailDefinition()
