@@ -26,7 +26,7 @@ namespace Email
 
             string[] CustomerKey = new string[] { "DV02", "Grunenthal", "OPEL", "OPUK", "Cleanbrite", "Nordea" }; // Define customers using service to match on
             string CKeyResult = CustomerKey.FirstOrDefault(s => args[4].Contains(s)); // Collect first match and place it in CKeyResult
-            string CustomerEmail = string.Empty;
+            string CustomerEmail;
 
             //Set customer enail address defined on contents of CKeyResult
             switch (CKeyResult)
@@ -48,6 +48,9 @@ namespace Email
                     break;
                 case "Nordea":
                     CustomerEmail = "dlldlondonit@nordea.com";
+                    break;
+                default:
+                    CustomerEmail = string.Empty;
                     break;
             }
             
