@@ -50,7 +50,7 @@ namespace Email
                     CustomerEmail = "dlldlondonit@nordea.com";
                     break;
                 default:
-                    CustomerEmail = string.Empty;
+                    CustomerEmail = null;
                     break;
             }
             
